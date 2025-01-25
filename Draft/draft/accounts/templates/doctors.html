@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors List</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Lucida Sans Unicode, sans-serif;
+            background: linear-gradient(to bottom, #66c2a5, #0077b6 80%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+
+        /* Header Styling */
+        h1 {
+            font-size: 36px;
+            color: rgba(0, 77, 64, 0.9); /* Dark teal */
+            background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Doctor List Container */
+        .doctor-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Form Styling */
+        form {
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        /* Button Styling */
+        button {
+            font-family: Lucida Sans Unicode, sans-serif;
+            background-color: #ffffff; /* Primary button color */
+            color: rgb(0, 0, 0);
+            font-size: 18px;
+            font-weight: bold;
+            padding: 15px 30px; /* Button padding */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hover Effects for Button */
+        button:hover {
+            background-color: #000000; /* Lighter blue on hover */
+            color: rgb(255, 255, 255);
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            button {
+                font-size: 16px;
+                padding: 10px;
+            }
+        }
+
+        /* Fade-in effect */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="fade-in">Doctors for {{ specialization }}</h1>
+    <div class="doctor-list fade-in">
+        {% if doctors %}
+            {% for doctor in doctors %}
+                <form action="{% url 'patient_request' doctor.id %}" method="GET">
+                    <button type="submit">{{ doctor.user.first_name }} {{ doctor.user.last_name }}</button>
+                </form>
+            {% endfor %}
+        {% else %}
+            <p>No doctors available for this specialization.</p>
+        {% endif %}
+    </div>
+
+    <script>
+        // Fade-in animation for the page content
+        window.onload = function() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach((element) => {
+                setTimeout(() => {
+                    element.classList.add('visible');
+                }, 100); // Delayed fade-in
+            });
+        };
+    </script>
+</body>
+</html>

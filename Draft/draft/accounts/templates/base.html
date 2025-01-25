@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{% block title %}Your Website{% endblock %}</title>
+
+    <!-- Chatbot CSS -->
+    <style>
+        #chatbot-container {
+            position: fixed;
+            right: 10px;
+            bottom: 100px;
+            width: 300px;
+            height: 300px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: none; 
+        }
+
+        #chatbot-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #chatbot-messages {
+            padding: 10px;
+            height: calc(100% - 90px);
+            overflow-y: auto;
+        }
+
+        #chatbot-input-container {
+            display: flex;
+            border-top: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        #chatbot-input {
+            flex-grow: 1;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #chatbot-send {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #chatbot-send:hover {
+            background-color: #0056b3;
+        }
+
+        /* Optional: Chatbot visibility toggle button */
+        #chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+        }
+
+        #chatbot-toggle:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Content of your page -->
+    {% block content %}{% endblock %}
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-container">
+        <div id="chatbot-header">Chat with us!</div>
+        <div id="chatbot-messages"></div>
+        <div id="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="Type a message..." />
+            <button id="chatbot-send">Send</button>
+        </div>
+    </div>
+
+    <!-- Chatbot Toggle Button -->
+    <button id="chatbot-toggle" onclick="toggleChatbot()">Assistant</button>
+
+    <!-- Chatbot JavaScript -->
+    <script>
+        // Toggle the chatbot
+        function toggleChatbot() {
+            var chatbot = document.getElementById('chatbot-container');
+            if (chatbot.style.display === "none" || chatbot.style.display === "") {
+                chatbot.style.display = "block";
+            } else {
+                chatbot.style.display = "none";
+            }
+        }
+
+        // Handle message sending and backend response
+        document.getElementById('chatbot-send').addEventListener('click', function() {
+            var inputField = document.getElementById('chatbot-input');
+            var message = inputField.value;
+
+            if (message.trim() !== "") {
+                var messagesContainer = document.getElementById('chatbot-messages');
+
+                // Display user's message
+                var userMessage = document.createElement('div');
+                userMessage.textContent = "You: " + message;
+                messagesContainer.appendChild(userMessage);
+
+                // Send the message to the Django backend
+                fetch('/chatbot-response/', { // Use the URL of your chatbot view
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': getCsrfToken() // Include the CSRF token
+                    },
+                    body: new URLSearchParams({ message: message }) // Send the message as form data
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Display bot's response
+                    var botReply = document.createElement('div');
+                    botReply.textContent = "Bot: " + data.message;
+                    messagesContainer.appendChild(botReply);
+
+                    // Scroll to the bottom
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    var errorReply = document.createElement('div');
+                    errorReply.textContent = "Bot: Sorry, something went wrong.";
+                    messagesContainer.appendChild(errorReply);
+                });
+
+                // Clear the input field
+                inputField.value = '';
+            }
+        });
+
+        // Function to retrieve CSRF token
+        function getCsrfToken() {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.startsWith('csrftoken=')) {
+                        cookieValue = cookie.substring('csrftoken='.length, cookie.length);
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        // Automatically show the chatbot after a delay (optional)
+         // Show after 2 seconds
+    </script>
+</body>
+</html>

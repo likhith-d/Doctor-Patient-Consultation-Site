@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Request</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Lucida Sans Unicode, sans-serif;
+            background: linear-gradient(to bottom, #66c2a5, #0077b6 80%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        /* Main content styling */
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80%;
+            padding: 20px;
+            text-align: center;
+            margin-top: 100px; /* Adjust for navbar space */
+            opacity: 0; /* Initially invisible */
+            transition: opacity 1s ease; /* Smooth fade-in */
+        }
+
+        /* Fade-in class for content */
+        .fade-in {
+            opacity: 1; /* Fully visible */
+        }
+
+        .content h1 {
+            font-size: 36px;
+            color: rgba(0, 77, 64, 0.9); /* Dark teal for text */
+            background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Space between heading and form */
+        }
+
+        /* Form Styling */
+        form {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Full width for smaller screens */
+            max-width: 500px; /* Maximum width for larger screens */
+        }
+
+        label {
+            font-size: 18px;
+            color: rgba(0, 77, 64, 0.9); /* Dark teal for label */
+        }
+
+        textarea {
+            width: 100%; /* Full width */
+            padding: 10px;
+            border: 1px solid #ccc; /* Light border */
+            border-radius: 5px;
+            margin-top: 10px; /* Space between label and textarea */
+            margin-bottom: 20px; /* Space below textarea */
+            resize: vertical; /* Allow vertical resize */
+        }
+
+        button {
+            font-family: Lucida Sans Unicode, sans-serif;
+            background-color: #ffffff; /* Primary button color */
+            color: rgb(0, 0, 0);
+            font-size: 18px;
+            font-weight: bold;
+            padding: 15px 30px; /* Button padding */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hover Effects for Button */
+        button:hover {
+            background-color: #000000; /* Lighter blue on hover */
+            color: rgb(255, 255, 255);
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        /* Footer Styling */
+        footer {
+            margin-top: auto;
+            background-color: white;
+            color: #2196F3;
+            padding: px 10px; /* Reduced padding */
+            font-size: 12px; /* Smaller text size */
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Content -->
+    <div class="content" id="main-content">
+        <h1>Request Appointment with Dr. {{ doctor.user.first_name }} {{ doctor.user.last_name }}</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="symptoms">Enter your symptoms:</label><br>
+            <textarea id="symptoms" name="symptoms" rows="4" required></textarea><br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Doctor Portal</p>
+    </footer>
+
+    <script>
+        // Fade-in effect for main content on page load
+        window.onload = function() {
+            const mainContent = document.getElementById('main-content');
+            setTimeout(() => {
+                mainContent.classList.add('fade-in');
+            }, 100); // Delay for fade-in
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Online Consultation Platform</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #66c2a5, #0077b6 80%); /* Updated background color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            color: black;
+        }
+
+        header {
+            color: black;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            background: transparent;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .feedback-section {
+            margin-top: 60px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .feedback-section h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: black;
+        }
+
+        .feedback-section label {
+            display: block;
+            text-align: left;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+
+        .feedback-section select,
+        .feedback-section textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .rating {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            font-size: 1.5rem;
+            color: lightgray;
+            cursor: pointer;
+        }
+
+        .rating input:checked ~ label,
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: gold;
+        }
+
+        .submit-feedback {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-feedback:hover {
+            background-color: #218838;
+        }
+
+        .feedback-list {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .feedback-list h3 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .feedback-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .feedback-item:last-child {
+            border-bottom: none;
+        }
+
+        .feedback-item p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Feedback Section</h1>
+    </header>
+    <main>
+        <div class="feedback-section">
+            <h2>Provide Feedback</h2>
+            <form id="feedbackForm">
+                <label for="doctor">Select Doctor:</label>
+                <select id="doctor" name="doctor" required>
+                    <option value="" disabled selected>Select a doctor</option>
+
+                    <!-- Kids Doctors -->
+                    <optgroup label="Kids">
+                        <option value="Sarah">Dr. Sarah - Pediatrician</option>
+                        <option value="Thompson">Dr. Thompson - Child Specialist</option>
+                    </optgroup>
+
+                    <!-- Adults Doctors -->
+                    <optgroup label="Adults">
+                        <option value="Samuel">Dr. Samuel - General Physician</option>
+                        <option value="John">Dr. John - Internal Medicine</option>
+                    </optgroup>
+
+                    <!-- Old Age Doctors -->
+                    <optgroup label="Old Age">
+                        <option value="Michael">Dr. Michael - Geriatrician</option>
+                        <option value="James">Dr. James - Senior Care Specialist</option>
+                    </optgroup>
+                </select>
+
+                <label for="rating">Rate the Consultation:</label>
+                <div class="rating">
+                    <input type="radio" id="rating5" name="rating" value="5"><label for="rating5">★</label>
+                    <input type="radio" id="rating4" name="rating" value="4"><label for="rating4">★</label>
+                    <input type="radio" id="rating3" name="rating" value="3"><label for="rating3">★</label>
+                    <input type="radio" id="rating2" name="rating" value="2"><label for="rating2">★</label>
+                    <input type="radio" id="rating1" name="rating" value="1"><label for="rating1">★</label>
+                </div>
+
+                <label for="review">Write a Review:</label>
+                <textarea id="review" name="review" placeholder="Share your thoughts..." required></textarea>
+
+                <button type="submit" class="submit-feedback">Submit Feedback</button>
+            </form>
+        </div>
+
+        <div class="feedback-list">
+            <h3>Feedback Received</h3>
+            <div id="feedbackContainer">
+                <!-- Feedbacks will be displayed here -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const feedbackForm = document.getElementById("feedbackForm");
+        const feedbackContainer = document.getElementById("feedbackContainer");
+
+        // Load feedback from localStorage
+        function loadFeedback() {
+            const feedbackList = JSON.parse(localStorage.getItem("feedbackList")) || [];
+            feedbackContainer.innerHTML = "";
+
+            feedbackList.forEach(feedback => {
+                const feedbackItem = document.createElement("div");
+                feedbackItem.className = "feedback-item";
+                feedbackItem.innerHTML = `
+                    <p><strong>Doctor:</strong> ${feedback.doctor}</p>
+                    <p><strong>Rating:</strong> ${"★".repeat(feedback.rating)}</p>
+                    <p><strong>Review:</strong> ${feedback.review}</p>
+                `;
+                feedbackContainer.appendChild(feedbackItem);
+            });
+        }
+
+        // Save feedback
+        feedbackForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const doctor = document.getElementById("doctor").value;
+            const rating = document.querySelector('input[name="rating"]:checked');
+            const review = document.getElementById("review").value;
+
+            if (!rating) {
+                alert("Please select a rating.");
+                return;
+            }
+
+            const feedbackList = JSON.parse(localStorage.getItem("feedbackList")) || [];
+            feedbackList.push({
+                doctor: doctor,
+                rating: parseInt(rating.value),
+                review: review
+            });
+
+            localStorage.setItem("feedbackList", JSON.stringify(feedbackList));
+            feedbackForm.reset();
+            alert("Feedback submitted successfully!");
+            loadFeedback();
+        });
+
+        // Initial load of feedback
+        loadFeedback();
+    </script>
+</body>
+</html>

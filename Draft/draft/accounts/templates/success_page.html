@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Submitted</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Lucida Sans Unicode', sans-serif;
+            background: linear-gradient(to bottom, #66c2a5, #0077b6 80%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centered content */
+        }
+
+        /* Main container styling */
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Full width for smaller screens */
+            max-width: 500px; /* Maximum width for larger screens */
+            opacity: 0; /* Initially invisible */
+            transition: opacity 1s ease; /* Smooth fade-in */
+        }
+
+        /* Fade-in class for container */
+        .fade-in {
+            opacity: 1; /* Fully visible */
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 36px;
+            margin-bottom: 20px; /* Space below the heading */
+        }
+
+        p {
+            font-size: 18px;
+            color: rgba(0, 77, 64, 0.9); /* Dark teal for text */
+            margin-bottom: 20px; /* Space below the paragraph */
+        }
+
+        /* Button-like link styling */
+        a {
+            font-family: Lucida Sans Unicode, sans-serif;
+            background-color: #ffffff; /* Primary button color */
+            color: rgb(0, 0, 0);
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 30px; /* Button padding */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hover Effects for Button */
+        a:hover {
+            background-color: #000000; /* Lighter blue on hover */
+            color: rgb(255, 255, 255);
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        /* Footer Styling */
+        footer {
+            margin-top: auto;
+            background-color: white;
+            color: #2196F3;
+            padding: px 10px; /* Reduced padding */
+            font-size: 12px; /* Smaller text size */
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="confirmation-message">
+        <h1>Request Submitted!</h1>
+        <p>Your request has been successfully submitted. We will get back to you soon.</p>
+        <a href="{% url 'home' %}">Go back to Home</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Doctor Portal</p>
+    </footer>
+
+    <script>
+        // Fade-in effect for container on page load
+        window.onload = function() {
+            const confirmationMessage = document.getElementById('confirmation-message');
+            setTimeout(() => {
+                confirmationMessage.classList.add('fade-in');
+            }, 100); // Delay for fade-in
+        };
+    </script>
+</body>
+</html>

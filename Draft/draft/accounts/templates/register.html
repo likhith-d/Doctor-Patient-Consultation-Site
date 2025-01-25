@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Register</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #66c2a5, #0077b6 80%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Flexbox container for the form */
+        .registration-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px; /* Limit the maximum width */
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Heading styles */
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        /* Form styling */
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Form inputs styling */
+        input, button {
+            padding: 12px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Hover and focus states for inputs */
+        input:focus {
+            border-color: #2196F3;
+            box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+            outline: none;
+        }
+
+        /* Button styling */
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Button hover animation */
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        /* Link to login */
+        a {
+            display: block;
+            margin-top: 15px;
+            color: #2196F3;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        /* Hover state for link */
+        a:hover {
+            color: #1769aa;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .registration-container {
+                padding: 20px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            input, button {
+                font-size: 14px; /* Smaller font size for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 18px;
+            }
+
+            button {
+                padding: 10px; /* Adjust padding for smaller buttons */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container">
+        <h2>Doctor Register</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Register</button>
+        </form>
+        <a href="{% url 'login' %}">Login</a>
+    </div>
+</body>
+</html>
+{% endblock %}
