@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>{% block title %}Your Website{% endblock %}</title>
+    <title>{% block title %}ChatBot{% endblock %}</title>
 
     <!-- Chatbot CSS -->
     <style>
         #chatbot-container {
             position: fixed;
             right: 10px;
-            bottom: 100px;
-            width: 300px;
+            bottom: 65px;
+            width: 200px;
             height: 300px;
             background-color: #f1f1f1;
             border-radius: 10px;
@@ -38,6 +38,7 @@
             display: flex;
             border-top: 1px solid #ccc;
             padding: 5px;
+            gap: 7px;
         }
 
         #chatbot-input {
@@ -45,6 +46,7 @@
             padding: 5px;
             border: none;
             border-radius: 5px;
+            width: 70%;
         }
 
         #chatbot-send {
@@ -54,6 +56,7 @@
             padding: 10px;
             border-radius: 5px;
             cursor: pointer;
+            width: 30%;
         }
 
         #chatbot-send:hover {
@@ -62,21 +65,28 @@
 
         /* Optional: Chatbot visibility toggle button */
         #chatbot-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: block;
-        }
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: transparent; /* Fixed */
+    color: black;
+    align-items: center;
+    font-size: 14px;
+    border: 1px dashed #0056b3;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex; /* Ensures alignment */
+    justify-content: center; /* Centers text */
+    height: 36px;
+    width: 100px;
+    transition: border 0.2s ease; /* Fixed */
+}
 
-        #chatbot-toggle:hover {
-            background-color: #0056b3;
-        }
+#chatbot-toggle:hover { 
+    border: 2px solid #0056b3;
+}
+
     </style>
 </head>
 <body>
