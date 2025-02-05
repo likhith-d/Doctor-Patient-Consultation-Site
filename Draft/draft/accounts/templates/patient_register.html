@@ -1,152 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 {% extends 'base.html' %}
+{% block title %}
+Patient Register
+{% endblock %}
 {% block content %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Register</title>
     <style>
-        /* General Reset */
+        @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+        @import url('https://fonts.cdnfonts.com/css/typographica');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Body Styling */
+        label {
+            font-size: 25px;
+            font-weight: 200;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #66c2a5, #0077b6 80%);
+            background: #202020;
+            color: #ffffff;
             min-height: 100vh;
-            display: flex;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            grid-template-columns: 30% 40% 30%;
             justify-content: center;
             align-items: center;
-            padding: 5%;
+            padding-bottom: 20px;
         }
 
-        /* Flexbox container for the registration form */
-        .register-container {
+        .heading {
+            margin-top: 3vw;
+            color: #ffffff;
+            text-align: left;
+            grid-column: 2/3;
+            grid-row: 1/2;
+            font-size: 3.5vw;
+        }
+
+        sub {
+            font-size: 1.95vw;
+            color: #44abff;
+        }
+
+        .registration-container {
             display: flex;
-            flex-direction: column;
+            padding: 40px;
+            font-size: 100%;
             justify-content: center;
             align-items: center;
-            background-color: white;
-            padding: 5%;
+            background-color: #4a4a4a9d;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
+            box-shadow: 0px 0px 10px 2px #a4a4a4;
             width: 100%;
-            text-align: center;
+            text-align: left;
+            grid-row: 2/3;
+            grid-column: 2/3;
+            place-self: center;
         }
 
-        /* Heading styles */
+        .typographica {
+            font-family: 'TypoGraphica', sans-serif;
+            font-weight: 400;
+        }
+
+        .gabarito {
+            font-family: "Gabarito", serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        
+        .outfit {
+            font-family: "Outfit", serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+        }
+
         h2 {
             margin-bottom: 20px;
-            color: #333;
-            font-size: 1.5rem;
-            font-weight: 600;
         }
 
-        /* Form styling */
         form {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 20px;
         }
 
-        /* Input fields and button styling */
         input, button {
             padding: 12px;
             width: 100%;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
+            font-size: 16px;
+            border: 2px solid #000000;
+            border-radius: 10px;
+            transition: box-shadow 0.3s ease, border-color 0.2s ease;
         }
 
-        /* Hover and focus states for inputs */
         input:focus {
-            border-color: #2196F3;
-            box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+            border-color: #ffffff;
+            box-shadow: 0px 0px 8px 3px #000000b0;
             outline: none;
         }
 
-        /* Button styling */
         button {
-            background-color: #2196F3;
+            background-color: #161616;
             color: white;
             border: none;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
-        /* Hover animation for button */
         button:hover {
-            background-color: #1769aa;
-            transform: scale(1.05);
+            background-color: #000000;
+            transform: scale(1.03);
         }
 
-        /* Link to login */
+        .errorlist {
+            color: #ff3c3c;
+            font-size: 130%;
+            padding-left: 5%;
+        }
+
         a {
-            display: block;
+            display: inline;
             margin-top: 15px;
-            color: #2196F3;
+            color: #63b9ff;
             text-decoration: none;
-            font-size: 0.9rem;
             transition: color 0.3s ease;
+            font-size: 30px;
+            font-weight: 500;
         }
 
-        /* Hover state for the link */
         a:hover {
-            color: #1769aa;
+            color: #000000;
         }
 
-        /* Responsive Design for smaller devices */
         @media (max-width: 768px) {
             body {
-                padding: 10%;
+                grid-template-columns: 10% 80% 10%;
             }
-
-            .register-container {
-                padding: 5%;
+            .heading {
+                font-size: 8vw;
             }
-
-            h2 {
-                font-size: 1.25rem;
-            }
-
-            input, button {
-                font-size: 0.9rem;
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h2 {
-                font-size: 1rem;
-            }
-
-            input, button {
-                font-size: 0.8rem;
-                padding: 8px;
-            }
-
-            a {
-                font-size: 0.8rem;
+            sub {
+                font-size: 4.46vw;
             }
         }
     </style>
 </head>
 <body>
-    <div class="register-container">
-        <h2>Patient Register</h2>
-        <form method="post">
+    <div class="heading">
+        <h2 class="typographica">SignUp<sub> Patient</sub></h2>
+    </div>
+    <div class="registration-container">
+        <form method="post" class="outfit">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Register</button>
+            <p style="font-size: 25px;">Already Have an Account .. ?<br><a href="{% url 'login' %}">Login Here</a></p>
         </form>
-        <a href="{% url 'login' %}">Login</a>
     </div>
 </body>
 </html>
