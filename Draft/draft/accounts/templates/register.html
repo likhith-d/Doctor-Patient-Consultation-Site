@@ -66,7 +66,7 @@ Doctor Register
         }
 
         sub{
-            font-size: 25px;
+            font-size: 1.95vw;
             color: #44abff;
         }
 
@@ -125,6 +125,35 @@ Doctor Register
             transform: scale(1.03);
         }
 
+        select {
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            border: 2px solid #000000;
+            border-radius: 10px;
+            background-color: #ffffff;
+            color: #000000;
+            transition: box-shadow 0.3s ease, border-color 0.2s ease;
+            cursor: pointer;
+            appearance: none; /* Removes default arrow styling */
+        }
+
+        select:focus {
+            border-color: #ffffff;
+            box-shadow: 0px 0px 8px 3px #000000b0;
+            outline: none;
+        }
+
+        select option {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        .errorlist{
+            color: #ff3c3c;
+            font-size: 130%;
+            padding-left: 5%;
+        }
+
         a {
             display: inline;
             margin-top: 15px;
@@ -137,6 +166,18 @@ Doctor Register
 
         a:hover {
             color: #000000;
+        }
+
+        @media (max-width: 768px){
+            body{
+                grid-template-columns: 10% 80% 10%;
+            }
+            .heading{
+                font-size: 8vw;
+            }
+            sub{
+                font-size: 4.46vw;
+            }
         }
         
     </style>
