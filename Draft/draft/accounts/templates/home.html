@@ -22,14 +22,15 @@ Homepage
 
         body {
             gap: 7%;
-            background: #f1f1f1;
+            background: #141414;
             height: auto;
             display: grid;
-            grid-template-rows: 40% 60%;
+            grid-template-rows: auto 1fr auto;
             grid-template-columns: 15% 70% 15%;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            margin-top: 50px;
+            color: #ffffff;
         }
 
         .typographica {
@@ -63,16 +64,17 @@ Homepage
         }
 
         .registration-container {
-            background-color: #e5e5e5;
+            background-color: #4a4a4a9d;
             grid-row: 2/3;
             grid-column: 2/3;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0px 0px 0px 0px #ff22226a;
+            box-shadow: 0px 0px 0px 0px #000000;
             text-align: center;
             width: 100%;
             animation: fadeIn 0.8s forwards;
             transition: box-shadow 0.3s ease, color 0.5s ease;  
+            margin-bottom: 100px;
         }
 
         .registration-container:hover{
@@ -87,7 +89,7 @@ Homepage
         }
 
         a {
-            color: #000000;
+            color: #ffffff;
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -160,11 +162,11 @@ Homepage
         <div class="gabarito">
             <label style="font-size: 135%; font-weight: 600; text-align: left;">
                 You'll see two options: 
-                <label style="font-size: 115%; font-weight: 600; color: #000000; font-style: italic;">
+                <label style="font-size: 115%; font-weight: 600; font-style: italic;">
                     <a href="{% url 'register' %}">doctor </a>
                 </label> 
                 and
-                <label style="font-size: 115%; font-weight: 600; color: #000000; font-style: italic">
+                <label style="font-size: 115%; font-weight: 600; font-style: italic">
                     <a href="{% url 'patient_register' %}">patient</a>
                 </label>
             </label>
