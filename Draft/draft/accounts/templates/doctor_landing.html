@@ -61,38 +61,85 @@
 
         sub{
             font-size: 30px;
-            color: #78c2ff;
+            color: #4285F4;
+            letter-spacing: -2px;
         }
 
         button {
             background-color: #ffffff; /* Primary button color */
             color: #000000;
             font-size: 20px;
-            font-weight: bold;
+            font-weight: 400;
             padding: 15px 30px; /* Button padding */
             border: none;
             border-radius: 50px;
             cursor: pointer;
             text-align: left;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.4s ease, font-weight 0.4s ease;
+            box-shadow: 0px 0px 0px 0px #ffffff;
         }
 
         button:hover {
-
+            background-color: #4285F4;
+            color: #ffffff;
+            font-weight: 550;
+            box-shadow: 0px 0px 10px 1px #4285F4;
         }
 
         footer {
             margin-top: auto;
             color: #ffffff;
             padding: 5px 10px;
-            font-size: 16px;
+            font-size: 1vw;
             text-align: center;
             width: 100%;
             font-weight: 200;
-            word-spacing: 2px;
+            word-spacing: 0.104vw;
         }
 
-        @media (max-width: 768px) {
+        .spec{
+                opacity: 0;
+                font-size: 0px; 
+            }
 
+        .heading{
+            font-size:150px;
+            padding-left: 1vw;
+        }
+
+        .buttonstyle{
+            padding-left: 1.8vw;
+            padding-top: 2vw;
+        }
+
+        @media (max-width: 1079px) {
+            .heading{
+                font-size:13vw;
+                padding-left: 1vw;
+            }
+            footer{
+                word-spacing: 0.104vw;
+                font-size: 1.5vw;
+            }
+            .content{
+                font-size: 4.4vw;
+            }
+            sub{
+                opacity: 0;
+                font-size: 0;
+            }
+            .spec{
+                opacity: 1;
+                padding-bottom: 10px;
+                margin-top: -0.52vw;
+                font-size: 3vw;
+                color: #4285F4;
+                word-spacing: -0.2vw;
+            }
+            button{
+                font-size: 2vw;
+                padding: 1vw 2vw;
+            }
         }
 
     </style>
@@ -101,13 +148,15 @@
 {% load static %}
     <div class="content" id="main-content">
         <h2 class="typographica">
-            <label style="font-size:150px; padding-left: 1vw;">Good Day .. 👋🏼<br></label></h2>
-        <h2 class="typographica" style="padding-left: 3vw; word-spacing: 10px;">Dr. {{first_name}} {{last_name}} <sub class="kelvetica" style="word-spacing: -2px;">{{spe}}</sub></h2>
-        <br>
+            <div class="heading">Good Day .. 👋🏼<br></label></h2>
+        <h2 class="typographica" style="padding-left: 2vw; word-spacing: 0.52vw;">Dr. {{first_name}} {{last_name}} <sub class="kelvetica" style="word-spacing: -2px;">{{spe}}</sub>
+            <div class="spec kelvetica">
+            {{spe}}
+        </div></h2>
         <a href="{% url 'doctor_requests' %}">
-            <label style="padding-left: 3vw;">
-                <button class="outfit">appointments</button>
-            </label>
+            <div class="buttonstyle">
+                <button class="outfit">Appointments</button>
+            </div>
         </a>
     </div>
 
