@@ -45,32 +45,30 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: left;
+            align-items: center;
             justify-content: center;
             color: #ffffff;
         }
 
         .content {
-            justify-content: center;
-            align-items: center;
             text-align: left;
             margin-top: 15vh;
             margin-left: 10vw;
-            font-size: 38px;
+            font-size: 3.8vw; /* Responsive font size */
         }
 
-        sub{
-            font-size: 30px;
+        sub {
+            font-size: 2.5vw; /* Responsive font size */
             color: #4285F4;
             letter-spacing: -2px;
         }
 
         button {
-            background-color: #ffffff; /* Primary button color */
+            background-color: #ffffff;
             color: #000000;
-            font-size: 20px;
+            font-size: 2vw; /* Responsive font size */
             font-weight: 400;
-            padding: 15px 30px; /* Button padding */
+            padding: 1.5vw 3vw; /* Responsive padding */
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -90,69 +88,102 @@
             margin-top: auto;
             color: #ffffff;
             padding: 5px 10px;
-            font-size: 1vw;
+            font-size: 1.5vw; /* Responsive font size */
             text-align: center;
             width: 100%;
             font-weight: 200;
             word-spacing: 0.104vw;
         }
 
-        .spec{
-                opacity: 0;
-                font-size: 0px; 
-            }
+        .spec {
+            opacity: 0;
+            font-size: 0;
+        }
 
-        .heading{
-            font-size:150px;
+        .heading {
+            font-size: 15vw; /* Responsive font size */
             padding-left: 1vw;
         }
 
-        .buttonstyle{
+        .buttonstyle {
             padding-left: 1.8vw;
             padding-top: 2vw;
         }
 
-        @media (max-width: 1079px) {
-            .heading{
-                font-size:13vw;
-                padding-left: 1vw;
+        @media (max-width: 768px) {
+            .content {
+                margin-left: 5vw;
+                font-size: 5vw; /* Larger font size for smaller screens */
             }
-            footer{
-                word-spacing: 0.104vw;
-                font-size: 1.5vw;
+
+            .heading {
+                font-size: 20vw; /* Larger font size for smaller screens */
             }
-            .content{
-                font-size: 4.4vw;
+
+            sub {
+                font-size: 4vw; /* Larger font size for smaller screens */
             }
-            sub{
-                opacity: 0;
-                font-size: 0;
+
+            button {
+                font-size: 4vw; /* Larger font size for smaller screens */
+                padding: 2vw 4vw; /* Larger padding for smaller screens */
             }
-            .spec{
+
+            footer {
+                font-size: 2.5vw; /* Larger font size for smaller screens */
+            }
+
+            .spec {
                 opacity: 1;
                 padding-bottom: 10px;
                 margin-top: -0.52vw;
-                font-size: 3vw;
+                font-size: 4vw; /* Larger font size for smaller screens */
                 color: #4285F4;
                 word-spacing: -0.2vw;
             }
-            button{
-                font-size: 2vw;
-                padding: 1vw 2vw;
-            }
         }
 
+        @media (max-width: 480px) {
+            .content {
+                margin-left: 2vw;
+                font-size: 6vw; /* Even larger font size for very small screens */
+            }
+
+            .heading {
+                font-size: 25vw; /* Even larger font size for very small screens */
+            }
+
+            sub {
+                font-size: 5vw; /* Even larger font size for very small screens */
+            }
+
+            button {
+                font-size: 5vw; /* Even larger font size for very small screens */
+                padding: 3vw 6vw; /* Even larger padding for very small screens */
+            }
+
+            footer {
+                font-size: 3vw; /* Even larger font size for very small screens */
+            }
+
+            .spec {
+                font-size: 5vw; /* Even larger font size for very small screens */
+            }
+        }
     </style>
 </head>
 <body>
 {% load static %}
     <div class="content" id="main-content">
         <h2 class="typographica">
-            <div class="heading">Good Day .. 👋🏼<br></label></h2>
-        <h2 class="typographica" style="padding-left: 2vw; word-spacing: 0.52vw;">Dr. {{first_name}} {{last_name}} <sub class="kelvetica" style="word-spacing: -2px;">{{spe}}</sub>
+            <div class="heading">Good Day .. 👋🏼<br></div>
+        </h2>
+        <h2 class="typographica" style="padding-left: 2vw; word-spacing: 0.52vw;">
+            Dr. {{first_name}} {{last_name}} <sub class="kelvetica" style="word-spacing: -2px;">{{spe}}</sub>
             <div class="spec kelvetica">
-            {{spe}}
-        </div></h2>
+                {{spe}}
+            </div>
+        </h2>
         <a href="{% url 'doctor_requests' %}">
             <div class="buttonstyle">
                 <button class="outfit">Appointments</button>
@@ -163,6 +194,6 @@
     <footer>
         <p class="outfit">Likhith Draksharam | 2300032720</p>
     </footer>
-
+</body>
 </html>
 {% endblock %}
