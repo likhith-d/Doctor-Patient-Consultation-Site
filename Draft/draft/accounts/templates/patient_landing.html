@@ -7,265 +7,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Landing Page</title>
     <style>
-        /* General Reset */
+        @import url('https://fonts.cdnfonts.com/css/typographica');
+        @import url('https://fonts.cdnfonts.com/css/kelvetica');
+        @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Body Styling */
+        .typographica {
+            font-family: 'TypoGraphica', sans-serif;
+            font-weight: 400;
+        }
+
+        .gabarito {
+            font-family: "Gabarito", serif;
+            font-weight: 600;
+        }
+
+        .outfit {
+            font-family: "Outfit", serif;
+        }
+
+        .kelvetica {
+            font-family: 'Kelvetica', sans-serif;
+        }
+
         body {
-            font-family: Lucida Sans Unicode, sans-serif;
-            background: #2196F3;
+            background: #202020;
             height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        /* Navbar Styling */
-        nav {
-            position: fixed;
-            top: -100px; /* Start off-screen */
-            width: 90%;
-            background-color: white;
-            padding: 15px 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 15px; /* Curved edges */
-            z-index: 1000; /* Ensure navbar stays above content */
-            opacity: 0;
-            transition: all 0.5s ease; /* Smooth transition for drop-down */
-        }
-
-        /* Animation for drop-down effect */
-        .drop-down {
-            top: 20px; /* Final position of the navbar */
-            opacity: 1; /* Make it visible */
-        }
-
-        /* Logo Styling */
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            height: 50px;
-            width: auto;
-            margin-right: 15px; /* Space between logo and text */
-        }
-
-        .logo h1 {
-            font-size: 24px;
-            color: #2196F3; /* Blue color for the logo text */
-            font-weight: bold;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 40px;
-        }
-
-        nav ul li {
-            display: inline;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #2196F3; /* Changed text to blue */
-            font-size: 18px;
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        nav ul li a:hover {
-            background-color: rgba(33, 150, 243, 0.1); /* Light blue hover effect */
-            transform: scale(1.1);
-        }
-
-        /* Responsive Menu for smaller screens */
-        .menu-icon {
-            display: none;
-            cursor: pointer;
-        }
-
-        .menu-icon div {
-            width: 30px;
-            height: 4px;
-            background-color: #2196F3;
-            margin: 6px 0;
-            transition: 0.4s;
-        }
-
-        /* Hide the menu for mobile */
-        .nav-links {
-            display: flex;
-            gap: 40px;
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                padding: 10px 20px;
-            }
-
-            .nav-links {
-                display: none; /* Initially hide the menu */
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                right: 20px;
-                background-color: white;
-                border-radius: 10px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-                width: 200px;
-                text-align: right;
-            }
-
-            nav ul li a {
-                padding: 15px;
-                text-align: left;
-            }
-
-            .menu-icon {
-                display: block;
-            }
-
-            .menu-icon.active + .nav-links {
-                display: flex;
-            }
-        }
-
-        /* Main content styling */
-        .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            align-items: left;
             justify-content: center;
-            height: 80%;
-            padding: 20px;
-            text-align: center;
-            margin-top: 100px; /* Adjust to accommodate floating navbar */
-            opacity: 0; /* Initially invisible */
-            transition: opacity 1s ease; /* Smooth fade-in */
+            color: #ffffff;
         }
 
-        /* Fade-in class for content */
-        .fade-in {
-            opacity: 1; /* Fully visible */
+        .content {
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+            margin-top: 15vh;
+            margin-left: 10vw;
+            font-size: 38px;
         }
 
-        .content h1 {
-            font-size: 36px;
-            color: rgba(0, 77, 64, 0.9); /* Dark teal for text */
-            background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        sub{
+            font-size: 30px;
+            color: #4285F4;
         }
 
-        /* Button Styling */
         button {
-            font-family: Lucida Sans Unicode, sans-serif;
-            background-color: #ffffff; /* Primary button color */
-            color: rgb(0, 0, 0);
-            font-size: 18px;
-            font-weight: bold;
-            padding: 15px 30px; /* Button padding */
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 20px;
+            font-weight: 400;
+            padding: 15px 30px;
             border: none;
-            border-radius: 10px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.4s ease, font-weight 0.4s ease;
         }
 
-        /* Hover Effects for Button */
         button:hover {
-            background-color: #000000; /* Lighter blue on hover */
-            color: rgb(255, 255, 255);
-            transform: scale(1.05); /* Slight zoom on hover */
+            background-color: #4285F4;
+            color: #ffffff;
+            font-weight: 550;
+            box-shadow: 0px 0px 10px 1px #4285F4;
         }
 
-        /* Footer Styling */
         footer {
             margin-top: auto;
-            background-color: white;
-            color: #2196F3;
-            padding: px 10px; /* Reduced padding */
-            font-size: 12px; /* Smaller text size */
+            color: #ffffff;
+            padding: 5px 10px;
+            font-size: 1vw;
             text-align: center;
             width: 100%;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            font-weight: 200;
+        }
+
+        .heading{
+            font-size:150px;
+            padding-left: 1vw;
+        }
+
+        .buttonstyle{
+            padding-left: 1.8vw;
+            padding-top: 2vw;
+        }
+
+        @media (max-width: 1079px) {
+            .heading{
+                font-size:13vw;
+                padding-left: 1vw;
+            }
+            footer{
+                font-size: 1.5vw;
+            }
+            .content{
+                font-size: 4.4vw;
+            }
+            sub{
+                opacity: 0;
+            }
+            button{
+                font-size: 2vw;
+                padding: 1vw 2vw;
+            }
         }
     </style>
 </head>
 <body>
 {% load static %}
-    <!-- Navbar -->
-    <nav id="navbar">
-    <div class="logo">
-        <img src="{% static 'logo.png' %}" alt="Doctor Portal Logo">
-    </div>
-    <div class="menu-icon" onclick="toggleMenu()">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-    <ul class="nav-links">
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'show_specializations' %}">Doctors</a></li>
-        <li><a href="{% url 'login' %}">Log Out</a></li>
-    </ul>
-</nav>
-
-
-    <!-- Main Content -->
     <div class="content" id="main-content">
-        <h1>Hello {{ first_name }} {{ last_name }}</h1>
-        <h2>&thinsp;</h2>
-
+        <h2 class="typographica">
+            <div class="heading">Welcome .. 👋🏼<br></div></h2>
+        <h2 class="typographica" style="padding-left: 2vw;">{{first_name}} {{last_name}}
+            <sub class="kelvetica">Patient</sub>
+        </h2>
         <a href="{% url 'show_specializations' %}">
-            <button>Select Specialization</button>
+            <div class="buttonstyle">
+                <button class="outfit">My Appointments</button>
+            </div>
         </a>
     </div>
 
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Doctor Portal</p>
+        <p class="outfit">Likhith Draksharam | 2300032720</p>
     </footer>
-
-    <script>
-        // Function to toggle the menu
-        function toggleMenu() {
-            const menuIcon = document.querySelector('.menu-icon');
-            const navLinks = document.querySelector('.nav-links');
-            menuIcon.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        }
-
-        // Drop-down animation for navbar and fade-in effect for main content on page load
-        window.onload = function() {
-            const navbar = document.getElementById('navbar');
-            const mainContent = document.getElementById('main-content');
-
-            // Drop-down effect for the navbar
-            setTimeout(() => {
-                navbar.classList.add('drop-down');
-            }, 600); // Delayed to ensure visibility
-
-            // Fade-in effect for the main content
-            setTimeout(() => {
-                mainContent.classList.add('fade-in');
-            }, 100); // Slightly delay to ensure navbar animation is first
-        };
-    </script>
 </body>
 </html>
 {% endblock %}
